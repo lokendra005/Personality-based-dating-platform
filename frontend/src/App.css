@@ -218,6 +218,12 @@
   margin: 0 auto;
   padding: 2rem 1.6rem 3rem;
 }
+/* Focused programmatically on every navigation so assistive tech lands in the
+   new page. It is a container, not a control, so it must not paint the UA's
+   focus ring around the whole viewport. */
+.app-main:focus {
+  outline: none;
+}
 
 /* ---------- Back bar ---------- */
 .back-bar {
