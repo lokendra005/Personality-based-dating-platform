@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import TiltCard from '../components/TiltCard';
 import { IconHeart, IconChat, IconUser, IconSpark, IconArrowLeft } from '../components/Icons';
 
 const features = [
@@ -47,16 +46,14 @@ export default function Dashboard() {
 
       <div className="feature-grid stagger">
         {features.map((f) => (
-          <TiltCard key={f.to} max={9}>
-            <Link to={f.to} className="feature-card">
+          <Link key={f.to} to={f.to} className="feature-card">
               <span className="feature-icon">{f.icon}</span>
               <h3>{f.title}</h3>
               <p>{f.desc}</p>
               <span className="feature-cta">
                 {f.cta} <IconArrowLeft style={{ transform: 'rotate(180deg)' }} />
               </span>
-            </Link>
-          </TiltCard>
+          </Link>
         ))}
       </div>
     </div>

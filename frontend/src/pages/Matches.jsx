@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { matches as matchesApi } from '../api';
 import useFetch from '../hooks/useFetch';
-import TiltCard from '../components/TiltCard';
 import CompatibilityRing from '../components/CompatibilityRing';
 import Avatar from '../components/Avatar';
 import Loading from '../components/Loading';
@@ -36,42 +35,36 @@ export default function Matches() {
           {list.map((m) => {
             const score = Math.round((m.score || 0) * 100);
             return (
-              <TiltCard key={m.user_id} max={8}>
-                <article className="match-card">
-                  <div className="match-media">
-                    <span className="match-ring-badge">
-                      <CompatibilityRing value={score} size={64} stroke={6} />
-                    </span>
-                    {m.photo_url ? (
-                      <img src={m.photo_url} alt={m.name || ''} loading="lazy" />
-                    ) : (
-                      <div className="match-media-fallback">
-                        <Avatar name={m.name} seed={m.user_id} size={96} />
-                      </div>
-                    )}
+              <article className="match-card" key={m.user_id}>
+                <div className="match-media">
+                  {m.photo_url ? (
+                    <img src={m.photo_url} alt={m.name || ''} loading="lazy" />
+                  ) : (
+                    <div className="match-media-fallback">
+                      <Avatar name={m.name} seed={m.user_id} size={84} />
+                    </div>
+                  )}
+                </div>
+                <div className="match-body">
+                  <div className="match-head">
                     <h3 className="match-name">{m.name}</h3>
+                    <CompatibilityRing value={score} size={58} stroke={4} />
                   </div>
-                  <div className="match-body">
-                    <div className="match-meta">
-                      {m.gender && (
-                        <span className="chip"><IconUser /> {m.gender}</span>
-                      )}
-                      {m.location && (
-                        <span className="chip"><IconPin /> {m.location}</span>
-                      )}
-                    </div>
-                    {m.bio && <p className="match-bio">{m.bio}</p>}
-                    <div className="match-actions">
-                      <Link to={`/app/matches/${m.user_id}`} className="btn btn-ghost">
-                        View
-                      </Link>
-                      <Link to={`/app/conversations/start/${m.user_id}`} className="btn btn-primary">
-                        <IconChat /> Message
-                      </Link>
-                    </div>
+                  <div className="match-meta">
+                    {m.gender && <span className="chip"><IconUser /> {m.gender}</span>}
+                    {m.location && <span className="chip"><IconPin /> {m.location}</span>}
                   </div>
-                </article>
-              </TiltCard>
+                  {m.bio && <p className="match-bio">{m.bio}</p>}
+                  <div className="match-actions">
+                    <Link to={`/app/matches/${m.user_id}`} className="btn btn-ghost">
+                      View
+                    </Link>
+                    <Link to={`/app/conversations/start/${m.user_id}`} className="btn btn-primary">
+                      <IconChat /> Message
+                    </Link>
+                  </div>
+                </div>
+              </article>
             );
           })}
         </div>
