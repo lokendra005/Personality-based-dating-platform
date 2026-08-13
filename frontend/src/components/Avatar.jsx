@@ -17,8 +17,20 @@ function pick(seed = '') {
   return INKS[h % INKS.length];
 }
 
-export default function Avatar({ name, src, seed, size = 56, className = '', ring = false }) {
-  const dim = { width: size, height: size, fontSize: size * 0.36 };
+export default function Avatar({
+  name,
+  src,
+  seed,
+  size = 56,
+  className = '',
+  ring = false,
+  fill = false,
+}) {
+  // `fill` lets a container size the tile instead — a match card wants the ink
+  // edge to edge so the name scrim has something solid to sit on.
+  const dim = fill
+    ? { fontSize: size * 0.36 }
+    : { width: size, height: size, fontSize: size * 0.36 };
 
   // No aria-label on the wrapper: ARIA forbids naming a generic <div>, so screen
   // readers drop it. The <img alt> names the photo branch; the initials tile is

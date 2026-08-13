@@ -453,11 +453,7 @@
 .feature-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-lg);
-  overflow: hidden;
+  gap: 1.3rem;
 }
 .feature-card {
   display: flex;
@@ -466,13 +462,18 @@
   height: 100%;
   padding: 1.5rem 1.4rem;
   background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  box-shadow: var(--lift);
   color: var(--ink-soft);
   text-decoration: none;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
-.feature-card:hover {
-  background: var(--paper-sunk);
-  text-decoration: none;
+.tilt:hover .feature-card {
+  border-color: var(--rule-strong);
+  box-shadow: var(--lift-lg);
   color: var(--ink-soft);
+  text-decoration: none;
 }
 .feature-icon {
   color: var(--accent);
@@ -503,10 +504,36 @@
 .feature-cta svg {
   width: 15px;
   height: 15px;
-  transition: transform 0.15s var(--ease);
+  transition: transform 0.2s var(--ease);
 }
-.feature-card:hover .feature-cta svg {
+.tilt:hover .feature-cta svg {
   transform: translateX(3px);
+}
+
+/* ---------- tilt ---------- */
+.tilt {
+  perspective: 900px;
+  height: 100%;
+}
+.tilt-inner {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.4s var(--ease);
+}
+
+/* Motion only where a real pointer can drive it. On touch, :hover latches
+   after a tap and the card would sit tilted until you tapped elsewhere. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .tilt-inner {
+    transition: transform 0.14s ease-out;
+  }
+  .tilt:hover .tilt-inner {
+    transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  }
+  .tilt:hover .match-media img {
+    transform: scale(1.05);
+  }
 }
 
 /* ---------- stagger ---------- */
@@ -524,61 +551,79 @@
 /* ---------- matches ---------- */
 .match-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.1rem;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  gap: 1.5rem;
 }
 .match-card {
-  display: grid;
-  grid-template-columns: 84px 1fr;
-  gap: 1.1rem;
-  padding: 1.2rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background: var(--paper-raised);
   border: 1px solid var(--rule);
   border-radius: var(--r-lg);
+  overflow: hidden;
   box-shadow: var(--lift);
-  transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
-.match-card:hover {
+.tilt:hover .match-card {
   border-color: var(--rule-strong);
-  box-shadow: var(--lift-md);
+  box-shadow: var(--lift-lg);
 }
 .match-media {
   position: relative;
-  width: 84px;
-  height: 84px;
-  border-radius: var(--r-md);
+  height: 196px;
+  background: var(--paper-deep);
   overflow: hidden;
-  background: var(--paper-sunk);
 }
 .match-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s var(--ease);
 }
-.match-media-fallback {
+.match-media-fallback,
+.match-media-fallback .avatar {
   width: 100%;
   height: 100%;
   display: grid;
   place-items: center;
+  border-radius: 0;
+}
+/* Scrim so the name stays legible over any photo. */
+.match-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(25, 23, 19, 0.82) 6%, rgba(25, 23, 19, 0) 46%);
 }
 .match-ring-badge {
-  display: none;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: 0.28rem;
+  border-radius: 50%;
+  background: var(--paper-raised);
+  box-shadow: var(--lift);
 }
-.match-name {
-  margin: 0 0 0.35rem;
-  font-size: 1.25rem;
+.match-media .match-name {
+  position: absolute;
+  left: 1.05rem;
+  bottom: 0.85rem;
+  z-index: 2;
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #fffdfa;
 }
 .match-body {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-  min-width: 0;
-}
-.match-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 0.65rem;
+  padding: 1.05rem 1.15rem 1.2rem;
+  flex: 1;
 }
 .match-meta {
   display: flex;
@@ -590,7 +635,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding: 0.15rem 0.5rem;
+  padding: 0.16rem 0.5rem;
   border-radius: var(--r-sm);
   background: var(--paper-sunk);
   color: var(--ink-soft);
@@ -604,8 +649,9 @@
 .match-bio {
   margin: 0;
   font-size: 0.93rem;
+  flex: 1;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -615,7 +661,8 @@
   margin-top: 0.2rem;
 }
 .match-actions .btn {
-  padding: 0.5rem 0.9rem;
+  flex: 1;
+  padding: 0.5rem 0.8rem;
   font-size: 0.88rem;
 }
 
@@ -675,19 +722,28 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
 }
 .conv-item {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  padding: 0.95rem 0.5rem;
-  border-bottom: 1px solid var(--rule);
+  gap: 0.95rem;
+  padding: 0.95rem 1.1rem;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  box-shadow: var(--lift);
   color: var(--ink-soft);
   text-decoration: none;
+  transition: transform 0.2s var(--ease), border-color 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
 }
 .conv-item:hover {
-  background: var(--paper-sunk);
+  transform: translateX(4px);
+  border-color: var(--rule-strong);
+  box-shadow: var(--lift-lg);
   color: var(--ink-soft);
   text-decoration: none;
 }
@@ -697,6 +753,8 @@
   min-width: 0;
 }
 .conv-item .conv-title {
+  font-family: var(--serif);
+  font-size: 1.08rem;
   font-weight: 600;
   color: var(--ink);
 }
@@ -708,7 +766,7 @@
   margin-left: auto;
   color: var(--rule-strong);
   display: inline-flex;
-  transition: transform 0.15s var(--ease), color 0.15s var(--ease);
+  transition: transform 0.2s var(--ease), color 0.2s var(--ease);
 }
 .conv-item:hover .conv-arrow {
   color: var(--accent);
@@ -1031,13 +1089,7 @@
   .user-chip {
     display: none;
   }
-  .match-card {
-    grid-template-columns: 60px 1fr;
-    gap: 0.9rem;
-    padding: 1rem;
-  }
   .match-media {
-    width: 60px;
-    height: 60px;
+    height: 168px;
   }
 }
