@@ -1,0 +1,15 @@
+# Kindred
+# Only the marketing/auth surface is worth indexing. Everything behind the auth
+# gate renders nothing to a crawler anyway — it redirects to /login — so keep it
+# out of the index rather than spending crawl budget on redirects.
+
+User-agent: *
+Allow: /$
+Allow: /login
+Allow: /register
+Disallow: /profile
+Disallow: /matches
+Disallow: /conversations
+
+# On deploy, point this at the real host:
+# Sitemap: https://your-domain.example/sitemap.xml

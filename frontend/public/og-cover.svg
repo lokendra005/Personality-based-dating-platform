@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Kindred — meet minds, not just faces">
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff4d7d"/>
+      <stop offset="55%" stop-color="#b14bff"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="12%" cy="0%" r="60%">
+      <stop offset="0%" stop-color="#ff4d7d" stop-opacity=".38"/>
+      <stop offset="100%" stop-color="#ff4d7d" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="92%" cy="10%" r="55%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity=".42"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowC" cx="78%" cy="108%" r="55%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity=".26"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#07070d"/>
+  <rect width="1200" height="630" fill="url(#glowA)"/>
+  <rect width="1200" height="630" fill="url(#glowB)"/>
+  <rect width="1200" height="630" fill="url(#glowC)"/>
+
+  <g transform="translate(88 92)">
+    <rect width="60" height="60" rx="17" fill="url(#brand)"/>
+    <path d="M30 47s-17-10.4-17-20.6a9.4 9.4 0 0 1 17-5.6 9.4 9.4 0 0 1 17 5.6C47 36.6 30 47 30 47Z" fill="#fff"/>
+    <text x="80" y="42" font-family="Sora, Inter, system-ui, sans-serif" font-size="34" font-weight="700" fill="#ececf5" letter-spacing="-1">Kindred</text>
+  </g>
+
+  <text x="88" y="330" font-family="Sora, Inter, system-ui, sans-serif" font-size="86" font-weight="800" fill="#ffffff" letter-spacing="-3">Meet minds,</text>
+  <text x="88" y="428" font-family="Sora, Inter, system-ui, sans-serif" font-size="86" font-weight="800" letter-spacing="-3">
+    <tspan fill="#ffffff">not just </tspan><tspan fill="url(#brand)">faces.</tspan>
+  </text>
+
+  <text x="90" y="502" font-family="Inter, system-ui, sans-serif" font-size="30" fill="#b7b7cc">Matched on personality, values and the way you think.</text>
+
+  <g transform="translate(88 548)" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#7d7d99">
+    <circle cx="7" cy="-7" r="4" fill="#ff6fae"/>
+    <text x="24" y="0">Personality-first matching, not endless swiping</text>
+  </g>
+</svg>
