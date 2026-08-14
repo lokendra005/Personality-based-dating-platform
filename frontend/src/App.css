@@ -558,8 +558,8 @@
 /* ---------- matches ---------- */
 .match-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(244px, 1fr));
+  gap: 1.25rem;
 }
 .match-card {
   position: relative;
@@ -579,7 +579,7 @@
 }
 .match-media {
   position: relative;
-  height: 206px;
+  height: 146px;
   background: var(--paper-sunk);
   overflow: hidden;
 }
@@ -602,27 +602,31 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(36, 26, 29, 0.78) 4%, rgba(36, 26, 29, 0) 46%);
+  background: linear-gradient(to top, rgba(36, 26, 29, 0.72) 2%, rgba(36, 26, 29, 0) 58%);
 }
 .match-ring-badge {
   position: absolute;
-  top: 0.85rem;
-  right: 0.85rem;
+  top: 0.6rem;
+  right: 0.6rem;
   z-index: 2;
   display: grid;
   place-items: center;
-  padding: 0.3rem;
+  padding: 0.25rem;
   border-radius: 50%;
   background: var(--paper-raised);
   box-shadow: var(--lift-md);
 }
 .match-media .match-name {
   position: absolute;
-  left: 1.15rem;
-  bottom: 0.9rem;
+  left: 0.95rem;
+  right: 0.95rem;
+  bottom: 0.7rem;
   z-index: 2;
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 1.12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #fff8f4;
@@ -630,8 +634,8 @@
 .match-body {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  padding: 1.1rem 1.2rem 1.3rem;
+  gap: 0.6rem;
+  padding: 0.9rem 1rem 1.05rem;
   flex: 1;
 }
 .match-meta {
@@ -672,8 +676,8 @@
 }
 .match-actions .btn {
   flex: 1;
-  padding: 0.55rem 0.85rem;
-  font-size: 0.9rem;
+  padding: 0.48rem 0.7rem;
+  font-size: 0.86rem;
 }
 
 /* ---------- match detail ---------- */

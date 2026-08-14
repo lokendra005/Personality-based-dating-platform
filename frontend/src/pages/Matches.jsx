@@ -43,13 +43,13 @@ export default function Matches() {
                 <article className="match-card">
                   <div className="match-media">
                     <span className="match-ring-badge">
-                      <CompatibilityRing value={score} size={64} stroke={6} />
+                      <CompatibilityRing value={score} size={50} stroke={4} label="" />
                     </span>
                     {m.photo_url ? (
                       <img src={m.photo_url} alt={m.name || ''} loading="lazy" />
                     ) : (
                       <div className="match-media-fallback">
-                        <Avatar name={m.name} seed={m.user_id} size={110} fill />
+                        <Avatar name={m.name} seed={m.user_id} size={74} fill />
                       </div>
                     )}
                     <h3 className="match-name">{m.name}</h3>
